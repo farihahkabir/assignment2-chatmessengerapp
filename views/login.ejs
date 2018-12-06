@@ -1,0 +1,82 @@
+<% include ./partials/header.ejs %>
+
+<head>
+<title>Chat App</title>
+<style>
+  #navbar{
+    background-color:#4f153e; 
+    margin-bottom: 0;
+    color: white;
+  }
+  p{
+    margin-top: 10px;
+    margin-left: 5px;
+    font-size: 20px;
+  }
+  #userFormArea{
+    margin-top: 100px;
+  }
+  #login{
+    background-color:#4f153e;
+    color: white;
+  }
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+      <p>Chat App</p>
+    </nav>
+    
+    
+    <div id="userFormArea" class="row" align="center">
+      <div class="col-md-4 col-md-offset-4">
+        <form id="userForm">
+          <div class="form-group">
+            <label style="font-size:30px">15-minute Chat Session</label>
+            <input class="form-control" id="name" placeholder="Enter Username">
+            <br />
+            <button class="btn btn-primary" id="login" type="button">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script 
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+  </script>
+  
+  <script>
+    var user = {name:""};
+            
+    $('#login').click(function(event){
+        user.name = $('#name').val();
+        $.ajax({
+            method: "POST",
+            url: "/user/create",
+            data: user
+        }).done(function(response){
+            console.log(response);
+        }).fail(function(response){
+            console.log(response.responseText);
+        });
+        document.location = '/';
+    });
+    
+    $('#getUser').click(function(event){
+      $.ajax({
+          method: "GET",
+          url: "/user/list",
+      }).done(function(response){
+          console.log(response);
+      }).fail(function(response){
+          console.log(response.responseText);
+      });
+    });
+  </script>
+  
+<% include ./partials/footer.ejs %>
