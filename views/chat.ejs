@@ -13,6 +13,10 @@
     background-color: #4f153e;
     color: white;
   }
+  #sendbtn{
+    background-color: #4f153e;
+    color: white;
+  }
   #navbar{
     background-color:#4f153e; 
     margin-bottom: 0;
@@ -63,11 +67,11 @@
         <form id="userForm">
           <div class="form-group">
             <label style="font-size:30px">Join</label>
-            <input class="form-control" id="displayName" placeholder="Enter Name">
+            <input class="form-control" id="username" placeholder="Enter Name">
             <br />
             <input class="form-control" id="sessionName" placeholder="Enter Session Name">
             <br />
-            <input id="startSession" type="submit" class="btn" value="Start Session" />
+            <input id="submitbtn" type="submit" class="btn" value="Start Session" />
           </div>
         </form>
       </div>
@@ -92,7 +96,7 @@
             <label>Enter Message</label>
             <textarea class="form-control" id="message"></textarea>
             <br />
-            <input id="submitbtn" type="submit" class="btn btn-primary" value="Send Message" />
+            <input id="sendbtn" type="submit" class="btn btn-primary" value="Send Message" />
           </div>
         </form>
       </div>
@@ -157,14 +161,18 @@
     $('#messagebtn').show();
     var presentTime = document.getElementById('timer').innerHTML;
     var timeArray = presentTime.split(/[:]+/);
-    var m = timeArray[0];
-    var s = checkSecond((timeArray[1] - 1));
-    if(s==59){m=m-1}
-    //if(m<0){alert('timer completed')}
-    document.getElementById('timer').innerHTML = m + ":" + s;
+    var min = timeArray[0];
+    var sec = checkSecond((timeArray[1] - 1));
+    
+    if(sec==59){min = min-1}
+    
+    document.getElementById('timer').innerHTML = min + ":" + sec;
+    
     myTime= setTimeout(startTimer, 1000);
-    if(m==00 && s==00){
+    
+    if(min==00 && sec==00){
       clearTimeout(myTime);
+      
       document.getElementById('timer').innerHTML = 00 + ":" + 00;
       $('#stopbtn').hide();
       $('#messagebtn').hide();
@@ -180,52 +188,14 @@
     $('#messagebtn').hide();
     $('#message').hide();
     $('#seplaceholder').show();
+    $('#sendbtn').hide();
   });
 
-  // function startTimer() {
-  //   var presentTime = document.getElementById('timer').innerHTML;
-  //   var timeArray = presentTime.split(/[:]+/);
-  //   var m = timeArray[0];
-  //   var s = checkSecond((timeArray[1] - 1));
-  //   if(s==59){m=m-1}
-  //   //if(m<0){alert('timer completed')}
-  //
-  //   document.getElementById('timer').innerHTML = m + ":" + s;
-  //   setTimeout(startTimer, 1000);
-  // }
-
   function checkSecond(sec) {
-    if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+    if (sec < 10 && sec >= 0) {sec = "0" + sec}; 
     if (sec < 0) {sec = "59"};
     return sec;
   }
-  
-  var user = {displayName:"", sessionName:""};
-            
-    $('#startSession').click(function(event){
-        user.displayName = $('#displayName').val();
-        user.sessionName = $('$sessionName').val();
-        $.ajax({
-            method: "POST",
-            url: "/user/create",
-            data: user
-        }).done(function(response){
-            console.log(response);
-        }).fail(function(response){
-            console.log(response.responseText);
-        });
-    });
-    
-    $('#getUser').click(function(event){
-      $.ajax({
-          method: "GET",
-          url: "/user/list",
-      }).done(function(response){
-          console.log(response);
-      }).fail(function(response){
-          console.log(response.responseText);
-      });
-    });
   </script>
 
 <% include ./partials/footer.ejs %>

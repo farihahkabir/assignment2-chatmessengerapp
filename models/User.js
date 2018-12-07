@@ -6,12 +6,6 @@ var userSchema = new Schema({
   name: {
     type: String,
     required: "Name required"
-  },
-  displayName: {
-    type: String
-  },
-  sessionName: {
-    type: String
   }
 });
 

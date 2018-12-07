@@ -22,11 +22,11 @@ app.use(bodyParser.urlencoded({extended:true}));
 users = [];
 connections = [];
 
-app.get('/', function(req, res){
+app.get('/chat', function(req, res){
   res.render('chat.ejs');
 });
 
-require('./routes/chat-routes.js')(app);
+require('./routes/user-routes.js')(app);
 
 io.sockets.on('connection', function(socket){
     connections.push(socket);
