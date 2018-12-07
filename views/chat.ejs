@@ -27,14 +27,12 @@
     margin-left: 5px;
     font-size: 20px;
   }
-  #timerbtn{
+  #startbtn{
     background-color: #4f153e;
     color: white;
-    font-size: 20px;
-    width: 30%;
-    padding: 20px;
-    margin-left: 115px;
+    margin-left: 135px;
   }
+  
   #timer{
     font-size: 30px;
     text-align: center;
@@ -43,10 +41,7 @@
     display: none;
     background-color: firebrick;
     color: white;
-    font-size: 20px;
-    width: 30%;
-    padding: 20px;
-    margin-left: 115px;
+    margin-left: 135px;
   }
 </style>
 </head>
@@ -80,8 +75,8 @@
           <ul class="list-group" id="users"></ul>
           <h3>Timer</h3>
           <p id="timer"></p>
-          <button id= "timerbtn">Start</button>
-          <button id= "stopbtn">Stop</button>
+          <button class="btn btn-primary" id= "startbtn">Start</button>
+          <button class="btn btn-primary" id= "stopbtn">Stop</button>
         </div>
       </div>
       <div class="col-md-8">
@@ -177,8 +172,8 @@
   //startTimer();
   var myTime;
 
-  $('#timerbtn').click(function startTimer(){
-    $('#timerbtn').hide();
+  $('#startbtn').click(function startTimer(){
+    $('#startbtn').hide();
     $('#stopbtn').show();
     $('#message').show();
     $('#messagebtn').show();
