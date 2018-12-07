@@ -48,10 +48,6 @@
     padding: 20px;
     margin-left: 115px;
   }
-  #seplaceholder{
-    display: none;
-    width: 60%;
-    font-size: large;
 </style>
 </head>
 
@@ -71,7 +67,7 @@
             <br />
             <input class="form-control" id="sessionName" placeholder="Enter Session Name">
             <br />
-            <input id="submitbtn" type="submit" class="btn" value="Start Session" />
+            <button id="submitbtn" type="submit" class="btn">Start Session</button>
           </div>
         </form>
       </div>
@@ -108,6 +104,33 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
+    var chat = {username:"", sessionName:""};
+            
+    $('#submitbtn').click(function(event){
+        chat.username = $('#username').val();
+        chat.sessionName = $('#sessionName').val();
+        $.ajax({
+            method: "POST",
+            url: "/chat/create",
+            data: chat
+        }).done(function(response){
+            console.log(response);
+        }).fail(function(response){
+            console.log(response.responseText);
+        });
+    });
+    
+    $('#getChat').click(function(event){
+      $.ajax({
+          method: "GET",
+          url: "/chat/list",
+      }).done(function(response){
+          console.log(response);
+      }).fail(function(response){
+          console.log(response.responseText);
+      });
+    });
+      
     $(function () {
       var socket = io();
       var $messageForm = $('#messageForm');
@@ -126,7 +149,7 @@
       });
       
       socket.on('new message', function(data){
-        $chat.append('<div class="well">'+data.msg+'</div>');
+        $chat.append('<div class="well"><strong>'+data.user+'</strong>: '+data.msg+'</div>');
       });
       
       $userForm.submit(function(e){
@@ -177,7 +200,6 @@
       $('#stopbtn').hide();
       $('#messagebtn').hide();
       $('#message').hide();
-      $('#seplaceholder').show();
     }
   });
 
@@ -187,7 +209,6 @@
     $('#stopbtn').hide();
     $('#messagebtn').hide();
     $('#message').hide();
-    $('#seplaceholder').show();
     $('#sendbtn').hide();
   });
 
@@ -196,6 +217,7 @@
     if (sec < 0) {sec = "59"};
     return sec;
   }
+    
   </script>
 
 <% include ./partials/footer.ejs %>

@@ -1,26 +1,26 @@
 <% include ./partials/header.ejs %>
 
 <head>
-<title>Chat App</title>
-<style>
-  #navbar{
-    background-color:#4f153e; 
-    margin-bottom: 0;
-    color: white;
-  }
-  p{
-    margin-top: 10px;
-    margin-left: 5px;
-    font-size: 20px;
-  }
-  #userFormArea{
-    margin-top: 100px;
-  }
-  #login{
-    background-color:#4f153e;
-    color: white;
-  }
-</style>
+  <title>Chat App</title>
+  <style>
+    #navbar{
+      background-color:#4f153e; 
+      margin-bottom: 0;
+      color: white;
+    }
+    p{
+      margin-top: 10px;
+      margin-left: 5px;
+      font-size: 20px;
+    }
+    #userFormArea{
+      margin-top: 100px;
+    }
+    #login{
+      background-color:#4f153e;
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
@@ -61,10 +61,10 @@
             data: user
         }).done(function(response){
             console.log(response);
+            document.location = '/chat';
         }).fail(function(response){
             console.log(response.responseText);
         });
-        document.location = '/chat';
     });
     
     $('#getUser').click(function(event){

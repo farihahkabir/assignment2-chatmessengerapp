@@ -5,13 +5,12 @@ var server = http.Server(app);
 var io = require('socket.io')(server);
 var bodyParser = require('body-parser');
 
-var db; //contains database value after successful connection
 var db_url = "mongodb://" + process.env.IP + ":27017";
 
 var mongoose = require("mongoose");
 
 //connecting to mongoose
-mongoose.connect(db_url+"/user");
+mongoose.connect(db_url+"/user", {useNewUrlParser: true});
 mongoose.connection.on('error', function(){
   console.log('Could not connect to mongodb');
 });
