@@ -20,4 +20,4 @@ Chat-
 ![capture](https://user-images.githubusercontent.com/43327792/49662894-40cc8e80-fa77-11e8-969e-a6b09a3136e4.jpg)
 
 Stop Session-
-![screenshot 41](https://user-images.githubusercontent.com/43327792/49641174-9e41ea80-fa39-11e8-94da-c875bf602902.png)
+![screenshot 43](https://user-images.githubusercontent.com/43327792/49664662-b71fbf80-fa7c-11e8-9387-89f56be7ee93.JPG)
